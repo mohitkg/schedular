@@ -53,7 +53,15 @@
         </div>
       </div>
     </div>
+<?php
+/*include_once("includes/functions.php");
+session_start();
+$_SESSION['email'];
+$_SESSION['password'];
+$_SESSION['loggedIn'] ;
+*/
 
+?>
     <!-- <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">

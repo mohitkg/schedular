@@ -1,6 +1,16 @@
 <?php
-include('includes/dashboard.php');
+//include('includes/dashboard.php');
 
+	session_start();
+	include('includes/functions.php');
+	
+
+if(loggedIn()){	
+	$inst_email = $_SESSION['userid'];
+	$instructor = User_Name($inst_email);
+
+echo "</br>Your Name : " . $instructor .'</br>'.' email-id : '. $inst_email .'</br></br>';
+ echo '<a href = "logout.php"> Logout </br></a>'; 
 // Configuration
 /*$dbhost = 'localhost';
 $dbname = 'test';
@@ -33,11 +43,31 @@ Timing
 <input  name="submitForm" id="submitForm" type="submit" value="Add" />
 </form>
 ';
-
 echo '
-<form action="extraclass.php" method="POST">
-Course Number:
-<input type="text" id="course_num" name="course_num"  />
+<form action="extraclass.php" method="POST">';
+echo 'Course';
+$con = new MongoClient();
+if($con){
+    $db = $con->acadSchedular;
+    $col = $db->Users;
+    $cursor = $col->find(array("userid"=>$inst_email), (array("_id" => 0, "courses" => 1)));
+    //$cursor = $col->find(); 
+
+    //echo "size ";
+    //echo $cursor->count();
+    //echo iterator_to_array($cursor);
+
+    echo "<select name='course_num' value='course_num'>course"; 
+    if($document = $cursor->getNext()) {
+      $course_list = $document["courses"];
+      $n = count($course_list);
+      for($i = 0; $i < $n; $i++){
+      echo "<option value=".$course_list[$i].">".$course_list[$i]."</option>"; 
+    }
+    }
+}
+    echo "</select>";
+echo '
 <input type="text" id="course_num" name="date[]">DD</input>
 <input type="text" id="course_num" name="date[]">MM</input>
 <input type="text" id="course_num" name="date[]">YY</input>
@@ -51,6 +81,12 @@ Timing
 <input  name="submitForm" id="submitForm" type="submit" value="ExtraClass" />
 </form>
 ';
+}
+else
+{
+header('Location: index.php');
+exit;
+}
 
 
 ?>

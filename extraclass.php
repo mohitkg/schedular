@@ -17,7 +17,7 @@ $con = new MongoClient();
  	$col_courses = $db->courses;
  	$col_schedule = $db->schedule;
  	$result = $col_courses->find();
- 	$cursor = $col_courses->find(array("course_name" => "eco101"), array("_id" => 0, "students" => 1));
+ 	$cursor = $col_courses->find(array("course_name" => $course), array("_id" => 0, "students" => 1));
  	echo "count of cursor is ";
  	echo $cursor->count();
  	if($document = $cursor->getNext()){
@@ -42,8 +42,11 @@ $con = new MongoClient();
 				echo "query failed";
 			}
 		}
+header('refresh:5;url=instructor.php');
 } else{
 	echo "cursor was null";
+	header('refresh:5;url=instructor.php');
+	
 }
 
  } else{
