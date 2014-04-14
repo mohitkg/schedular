@@ -2,7 +2,7 @@
 function redirecting($usr_email , $usr_password)
 {
 $m = new MongoClient();
-  $db   = $m->acadSchedular;
+  $db   = $m->acadScheduler;
   $coll = $db->Users;
 $query = $coll->find(array('userid' => $usr_email, 'password'=>  md5($usr_password)));
 
@@ -39,7 +39,7 @@ function checkPass($email, $password)
 function User_Name($email) 
 {
 	$m = new MongoClient();
-  	$db   = $m->acadSchedular;
+  	$db   = $m->acadScheduler;
   	$coll = $db->Users;
 //global $coll;
 //	echo $email;

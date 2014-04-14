@@ -7,7 +7,7 @@ if(isset($_POST) and $_POST['submitForm'] == "Add" ){
 	$instructor = User_Name($inst_email);
 //	echo $instructor ; 
 	$course = $_POST['course_num'];
-	$timing = $_POST['timing'];
+	$timing = explode('-', $_POST['timing'])[0];
 	$days = $_POST['days'];
 	$error = array();
 	if(empty($course)){
@@ -31,7 +31,7 @@ if(isset($_POST) and $_POST['submitForm'] == "Add" ){
 	//	echo "Connection to database successfully";
 		if($con){
 		// Select Database
-		$db = $con->acadSchedular;
+		$db = $con->acadScheduler;
 		$student = [];
 		// Select Collection
 		$collection = $db->Courses;

@@ -1,5 +1,5 @@
 <?php
-//include('includes/dashboard.php');
+include('includes/dashboard.php');
 
 	session_start();
 	include('includes/functions.php');
@@ -9,8 +9,7 @@ if(loggedIn()){
 	$inst_email = $_SESSION['userid'];
 	$instructor = User_Name($inst_email);
 
-echo "</br>Your Name : " . $instructor .'</br>'.' email-id : '. $inst_email .'</br></br>';
- echo '<a href = "logout.php"> Logout </br></a>'; 
+echo "</br>Your Name : " . $instructor .'</br>'.' email-id : '. $inst_email .'</br></br>'; 
 // Configuration
 /*$dbhost = 'localhost';
 $dbname = 'test';
@@ -34,11 +33,11 @@ Timing
   <option value="11-12">11-12</option>
 </select>
 </br>
-<input type="checkbox" name="days[]" value="M">M
-<input type="checkbox" name="days[]" value="T">T
-<input type="checkbox" name="days[]" value="W">W
-<input type="checkbox" name="days[]" value="Th">Th
-<input type="checkbox" name="days[]" value="F">F
+<input type="checkbox" name="days[]" value="Mon">Mon
+<input type="checkbox" name="days[]" value="Tue">Tue
+<input type="checkbox" name="days[]" value="Wed">Wed
+<input type="checkbox" name="days[]" value="Thu">Thu
+<input type="checkbox" name="days[]" value="Fri">Fri
 </br>
 <input  name="submitForm" id="submitForm" type="submit" value="Add" />
 </form>
@@ -48,7 +47,7 @@ echo '
 echo 'Course';
 $con = new MongoClient();
 if($con){
-    $db = $con->acadSchedular;
+    $db = $con->acadScheduler;
     $col = $db->Users;
     $cursor = $col->find(array("userid"=>$inst_email), (array("_id" => 0, "courses" => 1)));
     //$cursor = $col->find(); 
@@ -68,9 +67,16 @@ if($con){
 }
     echo "</select>";
 echo '
-<input type="text" id="course_num" name="date[]">DD</input>
-<input type="text" id="course_num" name="date[]">MM</input>
-<input type="text" id="course_num" name="date[]">YY</input>
+Date:
+<input type="text" name="date" id="datepicker">
+<script>
+  $(function() {
+    $( "#datepicker" ).datepicker({
+      dateFormat: "yy-mm-dd"
+    });
+  });
+</script>
+
 Timing
 <select name="timing">
   <option value="8-9">8-9</option>	
@@ -78,7 +84,7 @@ Timing
   <option value="10-11">10-11</option>
   <option value="11-12">11-12</option>
 </select>
-<input  name="submitForm" id="submitForm" type="submit" value="ExtraClass" />
+<button class="btn btn-primary" name="submit" type="submit">ExtraClass</button>
 </form>
 ';
 }

@@ -15,7 +15,7 @@ echo "</br>Your Name : " . $stud_name .'</br>'.' email-id : '. $stud_email .'</b
 echo 'Add a course </br> ';
 $con = new MongoClient();
 if($con){
-    $db = $con->acadSchedular;
+    $db = $con->acadScheduler;
     $col_user = $db->Users;
     $cursor = $col_user->find(array("userid" => $stud_email), array("_id" => 0, "courses" => 1));
     $my_courses = $cursor->getNext();

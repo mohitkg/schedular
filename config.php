@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 try
 {
  $m = new MongoClient();
-  $db   = $m->acadSchedular;
+  $db   = $m->acadScheduler;
 //  $db   = $m->bookMyevent;
 //  echo "<br>Connection to database successfully";
   $coll = $db->Users;

@@ -11,7 +11,7 @@ if(isset($_POST) and $_POST['submitForm'] == "Add" ){
 	//	echo "Connection to database successfully";
 		if($con){
 		// Select Database
-		$db = $con->acadSchedular;
+		$db = $con->acadScheduler;
 		$student = [];
 		// Select Collection
 		

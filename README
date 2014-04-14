@@ -1,4 +1,4 @@
-DataBase Name : acadSchedular
+DataBase Name : acadScheduler
 Collections :
  	courses -
  		"instructor_name" , "course_name" , "timing", "days" , "students" 
