@@ -25,10 +25,10 @@ function update_pwd($email, $password,$newpwd,$occup)
 {
 	global $coll;
 	$coll-> update(array('userid' => $email, 'password' => md5($password),'occupation' => $occup),array('$set' => array('userid' => $email, 'password' => md5($newpwd),'occupation' => $occup))	);
-	
+
 	return true;
 }
-function checkPass($email, $password) 
+function checkPass($email, $password)
 {
 	global $coll;
 	$res = $coll->findOne(array('userid' => $email, 'password' => md5($password)));
@@ -36,7 +36,7 @@ function checkPass($email, $password)
 	return true;
 	endif;
 }
-function User_Name($email) 
+function User_Name($email)
 {
 	$m = new MongoClient();
   	$db   = $m->acadScheduler;
@@ -44,21 +44,21 @@ function User_Name($email)
 //global $coll;
 //	echo $email;
 	$res = $coll->find(array('userid' => $email));
-	
+
 	$array = iterator_to_array($res);
-	
+
 	foreach ($array as $value) {
 		return $value['name'];
 
 }
-	
+
 }
 
-function cleanMemberSession($email, $password)
+function cleanMemberSession($email, $userType)
 {
 
 	$_SESSION["userid"]= $email;
-	$_SESSION["password"]=$password;
+	$_SESSION["userType"]=$userType;
 	$_SESSION["loggedIn"]=true;
 }
 

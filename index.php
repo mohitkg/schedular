@@ -1,4 +1,4 @@
-<?php 
+<?php
     include('includes/head.php');
     session_start();
 	include('includes/functions.php');
@@ -12,7 +12,7 @@
     <div id="left">
     <div id="content">
    		<center>     <h3 id="assignText">  Sign Up </h3> <br>	</center>
-	 </div> 
+	 </div>
      <center>
 	<div id="form1">
 
@@ -27,7 +27,7 @@
                 <td><input type='text' name='userid' class="span3" placeholder="Email"></td>
             </tr>
             <tr>
-                <td>Password:</td>  
+                <td>Password:</td>
                 <td><input type='password' name='password1' class="span3" placeholder="Password"></td>
             </tr>
 		  <tr>
@@ -35,39 +35,40 @@
                 <td> <input type='password' name='re_password1' class="span3" placeholder="Re_Password"></td>
             </tr>
 		  <tr>
+          <td></td>
             <td> <input type="radio" name="occup" value="instructor">Instructor</td>
             <td><input type="radio" name="occup" value="student">Student</td>
             </tr>
         </table>
 
                 <button type="submit" name = "submit" class="btn">Sign up</button>
-            
+
             </form>
 	</center>
     </div>
     </div>
 
-	
+
     <div id="form">
-	
+
 	<div>
-   		<center >     <h3 id="assignText">  Login Here </h3> <br> 	</center> 
-	 </div> 	    
+   		<center >     <h3 id="assignText">  Login Here </h3> <br> 	</center>
+	 </div>
               <center>
                 <form action='loginCheck.php' method='POST'>
-                <table> 
+                <table>
                     <tr>
-                        <td>Your Email:</td>  
+                        <td>Your Email:</td>
                         <td><input type='text' name='userid' class="span3" placeholder="Email"></td>
                     </tr>
                     <tr>
-                        <td>Password:</td> 
+                        <td>Password:</td>
                         <td><input type='password' name='password' class="span3" placeholder="Password"></td>
                     </tr>
                 </table>
                <button class="btn btn-primary" type="submit" name="submit" class="btn">Log in</button>
                <!--  <center>   <a href = "change_pwd.php"> Or change password </a> </center>-->
-                 
+
             </form>
          </center>
             <br>
@@ -92,11 +93,11 @@
                         <div class="btn-group">
                         <button class="btn" id="continueButton">Continue without logging in!</button>
                         </div>
-                    </a><br>  
+                    </a><br>
                 ';
             }
            */ ?>
-<!--            <a href="register.php" id="register">    
+<!--            <a href="register.php" id="register">
                 <div class="btn-group">
                     <button class="btn" id="registerButton">Register</button>
                 </div><!--<span class="label label-success">Register</span>

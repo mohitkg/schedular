@@ -1,5 +1,5 @@
 <?php
-/*include('functions.php');
+include('functions.php');
 
 session_start();
 if(!loggedIn()){
@@ -7,8 +7,8 @@ if(!loggedIn()){
 }
 else{
 
-$userid = $_SESSION['userid'];*/
-$userid = 'pri';
+$userid = $_SESSION['userid'];
+//$userid = 'pri';
 
 // Configuration
 $dbhost = 'localhost';
@@ -39,12 +39,12 @@ foreach ($userCourses as $course) {
 	$courseSlot = $courseInfo['timing'];
 	$courseDays = $courseInfo['days'];
 	//print_r($courseInfo);
-	
-	
+
+
 	foreach ($courseDays as $day) {
 		$classDateThisWeek = date("d")-( $dayToday-date('N', strtotime($day)) );
-		
-		for ($i=-9; $i < 10; $i++) { 
+
+		for ($i=-9; $i < 10; $i++) {
 			$startDate = mktime($courseSlot, 0, 0, date("m")  ,$classDateThisWeek+(7*$i) , date("Y"));
 			$startDate = date("Y-m-d\TH:i:sO",$startDate);
 			$endDate = mktime($courseSlot+1, 0, 0, date("m")  ,$classDateThisWeek+(7*$i) , date("Y"));
@@ -53,7 +53,7 @@ foreach ($userCourses as $course) {
 				'title' => $course,
 				'start' => $startDate,
 				'end' => $endDate,
-				'allDay' => false 
+				'allDay' => false
 			);
 		}
 	}
@@ -74,17 +74,18 @@ foreach ($userCourses as $course) {
 					'end' => $endDate,
 					'allDay' => false,
 					'color' => "#CF8092"
-				);	
+				);
 			}
 		}
 	}
 }
 
 //get personal schedule
+if(!empty($personalSchedules->findOne(array('userid'=>$userid))['schedule'])){
 foreach ($userPersonalSchedule as $event) {
-	$year = explode('-', $classDate)[0];
-	$month = explode('-', $classDate)[1];
-	$date = explode('-', $classDate)[2];
+	$year = explode('-', $event['date'])[0];
+	$month = explode('-', $event['date'])[1];
+	$date = explode('-', $event['date'])[2];
 	$startDate = $startDate = mktime($event['t1'], 0, 0, $month,$date, $year);
 	$endDate = $startDate = mktime($event['t2'], 0, 0, $month,$date, $year);
 	$eventsList[] = array(
@@ -95,8 +96,9 @@ foreach ($userPersonalSchedule as $event) {
 		'color' => "green"
 	);
 }
+}
 echo json_encode($eventsList);
-
+}
 
 
 /*echo '

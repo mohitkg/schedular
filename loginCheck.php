@@ -36,26 +36,30 @@ if(count($error)==0)
 	    exit;
 	    }
 
-cleanMemberSession($_POST["userid"], $_POST["password"]);
+
 $query = $coll->find(array('userid' => $usr_email, 'password'=>  md5($usr_password)));
 $array = iterator_to_array($query);
 
 foreach ($array as $value) {
-	if($value['occupation'] == "student")
-   		header("Location: student.php");
-   	if($value['occupation'] == "instructor")
-   		header("Location: instructor.php");
+	if($value['occupation'] == "student"){
+  	cleanMemberSession($_POST["userid"], $value['occupation']);
+		header("Location: basic-views.php");
+	}
+  if($value['occupation'] == "instructor"){
+  	cleanMemberSession($_POST["userid"], $value['occupation']);
+		header("Location: basic-views.php");
+	}
 }	/*
 if(  $value['occupation']== "student")
-	
-   
+
+
    else if($value['occupation']== "instructor")
 	header("Location: instructor.php");
 	*/
-//	echo $query['email'];		  
-    
-	
-	//echo $res["occupation"];    
+//	echo $query['email'];
+
+
+	//echo $res["occupation"];
 //    header("Location: members.php");
 }
 else

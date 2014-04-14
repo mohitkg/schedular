@@ -1,15 +1,16 @@
 <?php
-include('includes/dashboard.php');
+
 
 	session_start();
 	include('includes/functions.php');
-	
 
-if(loggedIn()){	
+
+if(loggedIn() && $_SESSION['userType']=='instructor'){
+	include('includes/dashboardInstructor.php');
 	$inst_email = $_SESSION['userid'];
 	$instructor = User_Name($inst_email);
 
-echo "</br>Your Name : " . $instructor .'</br>'.' email-id : '. $inst_email .'</br></br>'; 
+echo "</br>Your Name : " . $instructor .'</br>'.' email-id : '. $inst_email .'</br></br>';
 // Configuration
 /*$dbhost = 'localhost';
 $dbname = 'test';
@@ -27,7 +28,7 @@ Course Number:
 </br>
 Timing
 <select name="timing">
-  <option value="8-9">8-9</option>	
+  <option value="8-9">8-9</option>
   <option value="9-10">9-10</option>
   <option value="10-11">10-11</option>
   <option value="11-12">11-12</option>
@@ -50,18 +51,18 @@ if($con){
     $db = $con->acadScheduler;
     $col = $db->Users;
     $cursor = $col->find(array("userid"=>$inst_email), (array("_id" => 0, "courses" => 1)));
-    //$cursor = $col->find(); 
+    //$cursor = $col->find();
 
     //echo "size ";
     //echo $cursor->count();
     //echo iterator_to_array($cursor);
 
-    echo "<select name='course_num' value='course_num'>course"; 
+    echo "<select name='course_num' value='course_num'>course";
     if($document = $cursor->getNext()) {
       $course_list = $document["courses"];
       $n = count($course_list);
       for($i = 0; $i < $n; $i++){
-      echo "<option value=".$course_list[$i].">".$course_list[$i]."</option>"; 
+      echo "<option value=".$course_list[$i].">".$course_list[$i]."</option>";
     }
     }
 }
@@ -79,7 +80,7 @@ Date:
 
 Timing
 <select name="timing">
-  <option value="8-9">8-9</option>	
+  <option value="8-9">8-9</option>
   <option value="9-10">9-10</option>
   <option value="10-11">10-11</option>
   <option value="11-12">11-12</option>
@@ -110,36 +111,36 @@ YY<input type="text" id="course_num" name="date[]"/>
 </br> -->
 Timing start
 <select name="timing1">
-  <option value="8">8</option>  
+  <option value="8">8</option>
   <option value="9">9</option>
   <option value="10">10</option>
   <option value="11">11</option>
-  <option value="12">12</option>    
-  <option value="1">13</option>
-  <option value="2">14</option>
-  <option value="3">15</option>
-  <option value="4">16</option>
-  <option value="5">17</option>
+  <option value="12">12</option>
+  <option value="13">13</option>
+  <option value="14">14</option>
+  <option value="15">15</option>
+  <option value="16">16</option>
+  <option value="17">17</option>
 
 </select>
 Timing end
 <select name="timing2">
-  <option value="8">8</option>  
+  <option value="8">8</option>
   <option value="9">9</option>
   <option value="10">10</option>
   <option value="11">11</option>
-  <option value="12">12</option>    
-  <option value="1">13</option>
-  <option value="2">14</option>
-  <option value="3">15</option>
-  <option value="4">16</option>
-  <option value="5">17</option>
+  <option value="12">12</option>
+  <option value="13">13</option>
+  <option value="14">14</option>
+  <option value="15">15</option>
+  <option value="16">16</option>
+  <option value="17">17</option>
 
-Location :  
+Location :
 <input type="text" id="location" name="location"/>
 </br>
 <button class="btn btn-primary" name="submit" type="submit">Add Event</button>
-</form>     
+</form>
 </body>
 
 </html>
@@ -149,6 +150,7 @@ Location :
 }
 else
 {
+echo("Don't act smart, my buoy!");
 header('Location: index.php');
 exit;
 }

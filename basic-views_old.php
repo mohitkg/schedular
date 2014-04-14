@@ -1,14 +1,6 @@
 <?php
-include('includes/functions.php');
-session_start();
-if(!loggedIn()){
-	die("Don't act smart, my buoy!");
-}
-else{
-if($_SESSION['userType']=='instructor')
-	include('includes/dashboardInstructor.php');
-else
-	include('includes/dashboardStudent.php');
+include('includes/dashboard.php');
+
 
 
 echo "<html>
@@ -18,65 +10,30 @@ echo "<html>
 <script src='lib/jquery.min.js'></script>
 <script src='lib/jquery-ui.custom.min.js'></script>
 <script src='lib/fullcalendar.min.js'></script>
-<script type='text/javascript' src='includes/jquery.simpletip.min.js'></script>
 <script>
 
 	$(document).ready(function() {
-
+	
 		var date = new Date();
 		var d = date.getDate();
 		var m = date.getMonth();
 		var y = date.getFullYear();
-
+		
 		$('#calendar').fullCalendar({
 			header: {
-				left: 'prev,next,today',
-				center: 'title',
-				right: 'month, agendaWeek, agendaDay'
+				left: 'prev,next today',
+				center: 'title'
+				//right: 'basicWeek'
 			},
 			defaultView: 'agendaWeek',
 			minTime: 8,
 			maxTime: 19,
-			editable: false,
-			events:	'includes/feed.php',
-			eventMouseover: function(calEvent, jsEvent){
-				$('<p></p>')
-			        .addClass('tooltip')
-			        .text(calEvent.title)
-			        .appendTo('body')
-			    $(this).css('z-index', 10000);
-			    $('.tooltip').fadeIn('fast');
-			    $('.tooltip').fadeTo('10', 1.9);
-				$(this).mouseover(function(e) {
-
-			    }).mousemove(function(e) {
-			        $('.tooltip').css('top', e.pageY + 10);
-			        $('.tooltip').css('left', e.pageX + 20);
-			    });
-
-
-					/*$(this).mouseover(function(e){
-				        //alert(calEvent.title);
-				        $(this).css('z-index', 10000);
-				        // Hover over code
-				        $('<p></p>')
-				        .addClass('tooltip')
-				        .text(calEvent.title)
-				        .appendTo('body')
-				        .fadeIn('slow');
-					}).mousemove(function(e) {
-				        var mousex = e.pageX + 20; //Get X coordinates
-				        var mousey = e.pageY + 10; //Get Y coordinates
-				        $('.tooltip')
-				        .css({ top: mousey, left: mousex })
-					});*/
-			},
-			eventMouseout: function(calEvent, jsEvent) {
-  	  			$(this).css('z-index', 8);
-    			$('.tooltip').remove();
-			},
+			//editable: true,
+			events:	'includes/feed.php'
 		});
+		
 	});
+
 </script>
 <style>
 
@@ -98,7 +55,6 @@ echo "<html>
 <div id='calendar'></div>
 </body>
 </html>";
-}
 ?>
 
 
