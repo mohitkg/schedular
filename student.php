@@ -2,6 +2,7 @@
 <body>
 
 <?php 
+include('includes/dashboard.php');
 session_start();
   include('includes/functions.php');
   
@@ -10,7 +11,6 @@ if(loggedIn()){
   $stud_name = User_Name($stud_email);
   
 echo "</br>Your Name : " . $stud_name .'</br>'.' email-id : '. $stud_email .'</br></br>';
- echo '<a href = "logout.php"> Logout </br></a>'; 
 }
 echo 'Add a course </br> ';
 $con = new MongoClient();
@@ -57,38 +57,66 @@ if($con){
     echo '<input  name="submitForm" id="submitForm" type="submit" value="Add" />
           </form>';
 */
-
-  }        
-else echo "dfdf";
-?>
+echo '
 </br>
 create an event
 <form action="nonAcademic.php" method="POST">
 Title:
 <input type="text" id="title" name="title"  />
 </br>
-Date</br>
+Date:
+<input type="text" name="date" id="datepicker">
+<script>
+  $(function() {
+    $( "#datepicker" ).datepicker({
+      dateFormat: "yy-mm-dd"
+    });
+  });
+</script>
+<!-- Date</br>
 DD<input type="text" id="course_num" name="date[]"/>
 MM<input type="text" id="course_num" name="date[]"/>
 YY<input type="text" id="course_num" name="date[]"/>
-</br>
-Timing
-<select name="timing">
-  <option value="8-9">8-9</option>  
-  <option value="9-10">9-10</option>
-  <option value="10-11">10-11</option>
-  <option value="11-12">11-12</option>
-  <option value="12-1">12-1</option>    
-  <option value="1-2">1-2</option>
-  <option value="2-3">2-3</option>
-  <option value="3-4">3-4</option>
+</br> -->
+Timing start
+<select name="timing1">
+  <option value="8">8</option>  
+  <option value="9">9</option>
+  <option value="10">10</option>
+  <option value="11">11</option>
+  <option value="12">12</option>    
+  <option value="1">13</option>
+  <option value="2">14</option>
+  <option value="3">15</option>
+  <option value="4">16</option>
+  <option value="5">17</option>
 
 </select>
-Add people to the event
-<input type="text" id="members" name=members/>
+Timing end
+<select name="timing2">
+  <option value="8">8</option>  
+  <option value="9">9</option>
+  <option value="10">10</option>
+  <option value="11">11</option>
+  <option value="12">12</option>    
+  <option value="1">13</option>
+  <option value="2">14</option>
+  <option value="3">15</option>
+  <option value="4">16</option>
+  <option value="5">17</option>
+
+Location :  
+<input type="text" id="location" name="location"/>
 </br>
-<input  name="submitForm" id="submitForm" type="submit" value="Add" />
+<button class="btn btn-primary" name="submit" type="submit">Add Event</button>
 </form>     
 </body>
 
 </html>
+';
+
+
+  }        
+else echo "dfdf";
+?>
+

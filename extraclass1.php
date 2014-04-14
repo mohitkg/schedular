@@ -31,7 +31,7 @@ else{
 
 	$course_students = $courses->findOne( array('course_name'=>$extraClass_course) )['students'];
 	$all_courses = array();
-	//print_r($course_students);
+	print_r($course_students);
 	echo '<br>';
 	if (!empty($course_students)){
 		//echo 'hi';
@@ -44,29 +44,17 @@ else{
 				$all_courses = array_unique($all_courses);
 			}
 		}
-		//print_r($all_courses);
+		print_r($all_courses);
 
 		//check clashes
 		$clash = 0;
 		foreach ($all_courses as $course) {
 			$course_days = $courses->findOne( array('course_name'=>$course) )['days'];
 			$course_slot = $courses->findOne( array('course_name'=>$course) )['timing'];
-			
 			if (in_array($extraClass_day, $course_days) && $course_slot==$extraClass_slot ){
-				echo "Clash with regular class of ".$course."<br>";
+				echo "Clash with ".$course."<br>";
 				$clash = 1;
-			}
-			if(!empty($courses->findOne( array('course_name'=>$course) )['extra_class'])){
-
-				$course_extraSchedule = $courses->findOne( array('course_name'=>$course) )['extra_class'];
-				foreach ($course_extraSchedule as $extra_class) {
-					if (!empty($extra_class[$extraClass_date]) && $extra_class[$extraClass_date]==$extraClass_slot){
-						echo "Clash with extra class of ".$course."<br>";
-						$clash = 1;
-						break;
-					}
-					
-				}
+				break;
 			}
 		}
 		if($clash == 0){
