@@ -1,7 +1,6 @@
 <?php
-session_start();
 include('includes/functions.php');
-//var_dump($_SESSION);
+session_start();
 if(!loggedIn()){
 	die("Don't act smart, my bwoy!");
 }
@@ -39,7 +38,7 @@ echo "<html>
 			minTime: 8,
 			maxTime: 19,
 			editable: false,
-			events:	'includes/feed.php',
+			events:	'includes/feedAcademic.php',
 			eventMouseover: function(calEvent, jsEvent){
 				$('<p></p>')
 			        .addClass('tooltip')

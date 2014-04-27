@@ -1,25 +1,24 @@
 <?php
-function redirecting($usr_email , $usr_password)
+
+function redirecting($usr_email)
 {
-$m = new MongoClient();
-  $db   = $m->acadScheduler;
-  $coll = $db->Users;
-$query = $coll->find(array('userid' => $usr_email, 'password'=>  md5($usr_password)));
+//$m = new MongoClient();/
+//  $db   = $m->acadScheduler;
+//  $coll = $db->Users;
+//$query = $coll->find(array('userid' => $usr_email, 'password'=>  md5($usr_password)));
 
-$array = iterator_to_array($query);
-
-foreach ($array as $value) {
-	if($value['occupation'] == "student")
-   		header("Location: student.php");
-   	if($value['occupation'] == "instructor")
-   		header("Location: instructor.php");
-}
+//$array = iterator_to_array($query);
+if(loggedIn())
+	 header("Location: basic-views.php");
 }
 function newUser($name,$email, $password,$occup)
 {
+  global $db;
 	global $coll;
 	$coll->insert(array('name'=> $name,'userid' => $email, 'password' => md5($password),'occupation' => $occup, 'courses' => []));
-	return true;
+  $db->PersonalSchedule->insert(array('userid'=>$email,'schedule'=>[]));
+  //flushMemberSession();
+  return true;
 }
 function update_pwd($email, $password,$newpwd,$occup)
 {
@@ -56,27 +55,31 @@ function User_Name($email)
 
 function cleanMemberSession($email, $userType)
 {
-
+  //echo 'hi';
+  $_SESSION = array();
 	$_SESSION["userid"]= $email;
 	$_SESSION["userType"]=$userType;
 	$_SESSION["loggedIn"]=true;
+  //header("refresh:4;url= basic-views.php");
 }
 
 function flushMemberSession()
 {
 	unset($_SESSION["userid"]);
-	unset($_SESSION["password"]);
 	unset($_SESSION["loggedIn"]);
-	session_destroy();
+  unset($_SESSION["userType"]);
+	if(session_id() != '')
+		session_destroy();
 	return true;
 }
 
 function loggedIn()
 {
-	if(isset($_SESSION['loggedIn'])):
+	if(isset($_SESSION['loggedIn'])){
 	  return true;
-	else:
+  }
+	else{
 	  return false;
-	endif;
+	}
 }
 ?>

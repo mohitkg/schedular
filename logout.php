@@ -2,7 +2,8 @@
 	$(".alert").alert();
 </script>-->
 <?php
-include_once("config.php");
+session_start();
+include('includes/functions.php');
 flushMemberSession();
 header('Location: index.php');
 
@@ -15,7 +16,7 @@ header('Location: index.php');
 	echo '
 		<div id="nav">
             <ul class="nav nav-pills nav-stacked" id="list">
-              <li class="active"><a href="member.php">Next 7 days</a></li> 
+              <li class="active"><a href="member.php">Next 7 days</a></li>
               <li><a href="manage.php">Book new event</a></li>
               <li><a href="myBookings.php">My Bookings</a></li>
             </ul>

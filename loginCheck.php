@@ -11,6 +11,7 @@ redirecting($usr_email,$usr_password);
 
 if(isset($_POST["submit"]))
 {
+$error = array();
 //echo "SahilSolanki\n";
 
 $usr_email = $_POST['userid'];

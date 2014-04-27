@@ -1,12 +1,13 @@
 <?php
-if(isset($_POST) and $_POST['submitForm'] == "Add" ){
+if(isset($_POST['submitForm']) ){
 	session_start();
 	include('includes/functions.php');
+	include('includes/dashboardStudent.php');
 	$stud_email = $_SESSION['userid'];
 	$student_name = User_Name($stud_email);
-	echo $student_name;
+	//echo $student_name;
 	$course = $_POST['course_num'];
-	echo $course;
+	//echo $course;
 	$con = new MongoClient();
 	//	echo "Connection to database successfully";
 		if($con){
@@ -14,11 +15,11 @@ if(isset($_POST) and $_POST['submitForm'] == "Add" ){
 		$db = $con->acadScheduler;
 		$student = [];
 		// Select Collection
-		
+
 		$collection = $db->Courses;
-		
+
 		$collection->update(array("course_name"=>$course), array('$push' => array("students" => $stud_email )));
-		echo "student added to list </br>";
+		echo "<center><h4>Student added to List <br>";
 /*		$cursor = $collection->find(array("course_name"=>$course), array("_id" => 0, "timing" => 1, "days" => 1));
 		if($a = $cursor->getNext()){
 			//echo $a['timing'];
@@ -40,17 +41,20 @@ if(isset($_POST) and $_POST['submitForm'] == "Add" ){
 			print_r($a);
 		}*/
 		$collection = $db->Users;
-		echo "schedule of student is updating";
+		echo "Updating your schedule<br>";
 		$collection->update(array("userid" => $stud_email), array('$push' => array("courses" => $course)));
-		echo "course added succesfully";
+		echo "Registered in Course succesful</h4></center>";
 		/*echo $cursor['timing'];
 		echo "is timing";
 		echo $cursor['days'];
 		echo "are days";*/
 
-	echo "</br>registered";
-	header('refresh:5;url=student.php');
+	header('refresh:1;url=basic-views.php');
 	}
 }
-
-?>
+else
+{
+echo("Don't act smart, my bwoy!");
+header('Location: index.php');
+exit;
+}?>

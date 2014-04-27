@@ -2,10 +2,10 @@
 include('includes/functions.php');
 session_start();
 if(!loggedIn()){
-	die("Don't act smart, my buoy!");
+	die("Don't act smart, my bwoy!");
 }
 else{
-	if($_SESSION['userType']=='instructor')
+	if(isset($_SESSION['userType']))
 		include('includes/dashboardInstructor.php');
 	else
 		include('includes/dashboardStudent.php');
@@ -29,7 +29,7 @@ else{
 		//date_default_timezone_set('Asia/Calcutta');
 		//$extraClass_day = date('D',strtotime($extraClass_date));
 
-		echo $user."wants to add an event ". $event_title. " on ". $event_date ." from ". $event_time_start." to ". $event_time_end . " at ". $event_location. "<br>";
+
 
 		// Configuration
 		$dbhost = 'localhost';
@@ -43,9 +43,10 @@ else{
 		$collection = $db->PersonalSchedule;
 
 		$success = $collection->update(array('userid' => $user), array('$push' => array('schedule'=> array('title' => $event_title, 'date' => $event_date, 'location' => $event_location, 't1' => $event_time_start, 't2' => $event_time_end))));
-		if($success) echo 'done';
-		else echo 'fail';
+		if($success) echo "<br><br><center><h4>Event added to Personal Schedule: ". $event_title. " on ". $event_date ." from ". $event_time_start." to ". $event_time_end . " at ". $event_location. "</h4><center/><br>";
+		else echo '<h4>Error</h4>';
 
+		header('refresh:1;url=personal-views.php');
 	}
 }
 ?>

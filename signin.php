@@ -3,6 +3,7 @@
 include_once("config.php");
 if(isset($_POST['submit']))
 {
+flushMemberSession();
 $usr_name = $_POST['name'];
 $usr_email = $_POST['userid'];
 $usr_password = $_POST['password1'];
@@ -34,10 +35,11 @@ if(empty($usr_occup)){
 if(!($_POST["password1"] == $_POST["re_password1"])){
 	$error[] = "Password did not match";
 }
+
 if(count($error)==0)
 {
 //	include_once('config.php');
-/*	
+/*
 */
 	//echo "running";
 
@@ -45,19 +47,16 @@ if(count($error)==0)
 //	echo $query;
 	if(empty($query)){
 		newUser($usr_name,$usr_email, $usr_password,$usr_occup);
-		cleanMemberSession($usr_email, $usr_password);
-		header("Location: members.php");
-		if($usr_occup == "student")
-   		header("Location: student.php");
-   		if($usr_occup == "instructor")
-   		header("Location: instructor.php");
+		//cleanMemberSession($usr_email, $usr_occup);
+		echo "<script>alert('Registered, Proceed towards Login');</script>";
+		header("refresh:0;url=index.php");
 	}
 	else {
 	  echo '<p> Email already exists, please sign in with another email.</p>';
 	echo '<p> Go back to <a href =  \' index.php \'> Register </a>';
-	
+
 	   }
-	
+
 }
 else
 {
@@ -74,4 +73,3 @@ header ('Location :index.php');
 }
 */
 ?>
-

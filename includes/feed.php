@@ -3,7 +3,7 @@ include('functions.php');
 
 session_start();
 if(!loggedIn()){
-	die("Don't act smart, my buoy!");
+	die("Don't act smart, my bwoy!");
 }
 else{
 
@@ -80,16 +80,18 @@ foreach ($userCourses as $course) {
 	}
 }
 
-//get personal schedule
+///get personal schedule
 if(!empty($personalSchedules->findOne(array('userid'=>$userid))['schedule'])){
 foreach ($userPersonalSchedule as $event) {
 	$year = explode('-', $event['date'])[0];
 	$month = explode('-', $event['date'])[1];
 	$date = explode('-', $event['date'])[2];
-	$startDate = $startDate = mktime($event['t1'], 0, 0, $month,$date, $year);
-	$endDate = $startDate = mktime($event['t2'], 0, 0, $month,$date, $year);
+	$startDate = mktime($event['t1'], 0, 0, $month,$date, $year);
+	$startDate = date("Y-m-d\TH:i:sO",$startDate);
+	$endDate = mktime($event['t2'], 0, 0, $month,$date, $year);
+	$endDate = date("Y-m-d\TH:i:sO",$endDate);
 	$eventsList[] = array(
-		'title' => $event['title'],
+		'title' => $event['title']." - ".$event['location'],
 		'start' => $startDate,
 		'end' => $endDate,
 		'allDay' => false,

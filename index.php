@@ -4,8 +4,7 @@
 	include('includes/functions.php');
 	if(loggedIn()){
 	$usr_email = $_SESSION['userid'];
-	$usr_password = $_SESSION['password'];
-	redirecting($usr_email,$usr_password);
+	redirecting($usr_email);
 	}
 ?>
 <p><br><br><br></p>
@@ -44,6 +43,7 @@
                 <button type="submit" name = "submit" class="btn">Sign up</button>
 
             </form>
+
 	</center>
     </div>
     </div>

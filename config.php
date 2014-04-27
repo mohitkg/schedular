@@ -1,4 +1,4 @@
-<?php 
+<?php
 //include ("includes/head.php");
 ?>
 <?php
@@ -16,17 +16,16 @@ try
 catch (MongoConnectionException $e)
 {
   die('<br>Error connecting to MongoDB server');
-} 
+}
 catch (MongoException $e) {
   die('<br> Error: ' . $e->getMessage());
 }
 
 //echo "running";
 include_once("includes/functions.php");
-session_start();
+//session_start();
 $_SESSION['userid'] = Null;
-$_SESSION['password'] =Null;
-$_SESSION['loggedIn'] ;
+$_SESSION['loggedIn'] = Null;
 
 
 ?>

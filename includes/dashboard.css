@@ -9,3 +9,11 @@
   font-size:12px Arial;
   z-index: 10001;
 }
+#extraClassForm{
+position: relative;
+top: 60px;
+}
+#addCourseForm{
+position: relative;
+top: 60px;
+}

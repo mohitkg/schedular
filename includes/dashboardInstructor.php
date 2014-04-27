@@ -41,13 +41,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="#">Instructor</a>
+          <a class="brand" href="basic-views.php">Instructor Home</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li><a href="#">Add Course</a></li>
-              <li><a href="#">Add Extra Class</a></li>
-              <li><a href="#about">Add Event</a></li>
-              <li><a href="basic-views.php">View Personal Scedule</a></li>
+              <li><a href="addcourseForm.php">Add Course</a></li>
+              <li><a href="extraClassForm.php">Add Extra Class</a></li>
+              <li><a href="addEventForm.php">Add Event</a></li>
+              <li><a href="academic-views.php">Academic Scedule</a></li>
+              <li><a href="personal-views.php">Personal Scedule</a></li>
             </ul>
           </div><!--/.nav-collapse -->
           <ul class="nav navbar-nav pull-right">
@@ -56,7 +57,7 @@
             <span class="glyphicon glyphicon-cog" style="font-size:18px"></span>
           <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Profile</a></li>
+            <li><a href="#"><?php echo $_SESSION['userid']; ?></a></li>
             <li><a href="logout.php">Logout</a></li>
           </ul>
         </li>
